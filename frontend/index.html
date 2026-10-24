@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PetBridge | Client portal</title>
+<meta name="description" content="PetBridge pet care platform: bookings, health records, a verified provider directory, adoption and lost and found.">
+<meta name="theme-color" content="#2E7D6B">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="./icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./app.css">
+</head>
+<body class="portal-client">
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="./index.html"><img src="./icon.svg" alt=""><span>PetBridge<small>your pet's care bridge</small></span></a>
+    <nav class="topnav">
+      <a href="#pets">My pets</a>
+      <a href="#directory">Directory</a>
+      <a href="#bookings">My bookings</a>
+      <a href="#lost">Lost &amp; found</a>
+      <a href="#community">Community</a>
+      <a href="#shop">Shop</a>
+    </nav>
+    <div class="userbox">
+      <span class="small" id="user-name"></span>
+      <a class="btn ghost small" id="provider-link" href="./provider.html" hidden>Provider portal</a>
+      <a class="btn ghost small" id="admin-link" href="./admin.html" hidden>Admin</a>
+      <button class="btn small" id="logout-btn" type="button">Sign out</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="msg error" id="page-error"></div>
+  <div class="msg success" id="page-ok"></div>
+
+  <section class="hero">
+    <div class="hero-main">
+      <span class="kicker">Client portal</span>
+      <h1>Everything your pet needs, in one notebook.</h1>
+      <p>Follow vaccinations and due dates, book a clinic, grooming or boarding with verified providers, report a lost pet, and order supplies from nearby shops.</p>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem">
+        <a class="btn ochre" href="#directory">Book a service now</a>
+        <button class="btn ghost" id="tour-btn" type="button">Take the short tour</button>
+      </div>
+      <p class="margin-note" style="margin:.9rem 0 0">start with your pets — the rest falls into place</p>
+    </div>
+    <aside class="hero-side" id="due-panel">
+      <h3>Coming due for your pets</h3>
+      <div id="due-list"><p class="small">Loading…</p></div>
+      <div id="notif-list"></div>
+      <p class="margin-note" style="margin:.6rem 0 0">we watch the dates so you don't have to</p>
+    </aside>
+  </section>
+
+  <svg class="paw-trail" viewBox="0 0 1120 54" preserveAspectRatio="none" aria-hidden="true">
+    <path class="trail" d="M4 40 C 200 8, 380 50, 560 24 S 940 10, 1116 34"/>
+    <g class="paw"><ellipse cx="150" cy="26" rx="7" ry="5.6"/><ellipse cx="138" cy="17" rx="3" ry="3.8" transform="rotate(-16 138 17)"/><ellipse cx="147" cy="13.5" rx="3" ry="4"/><ellipse cx="156" cy="13.5" rx="3" ry="4"/><ellipse cx="164" cy="17" rx="3" ry="3.8" transform="rotate(16 164 17)"/></g>
+    <g class="paw" transform="translate(330,6) rotate(8)"><ellipse cx="150" cy="26" rx="7" ry="5.6"/><ellipse cx="138" cy="17" rx="3" ry="3.8" transform="rotate(-16 138 17)"/><ellipse cx="147" cy="13.5" rx="3" ry="4"/><ellipse cx="156" cy="13.5" rx="3" ry="4"/><ellipse cx="164" cy="17" rx="3" ry="3.8" transform="rotate(16 164 17)"/></g>
+    <g class="paw" transform="translate(540,-4) rotate(-6)"><ellipse cx="150" cy="26" rx="7" ry="5.6"/><ellipse cx="138" cy="17" rx="3" ry="3.8" transform="rotate(-16 138 17)"/><ellipse cx="147" cy="13.5" rx="3" ry="4"/><ellipse cx="156" cy="13.5" rx="3" ry="4"/><ellipse cx="164" cy="17" rx="3" ry="3.8" transform="rotate(16 164 17)"/></g>
+    <g class="paw" transform="translate(760,4) rotate(10)"><ellipse cx="150" cy="26" rx="7" ry="5.6"/><ellipse cx="138" cy="17" rx="3" ry="3.8" transform="rotate(-16 138 17)"/><ellipse cx="147" cy="13.5" rx="3" ry="4"/><ellipse cx="156" cy="13.5" rx="3" ry="4"/><ellipse cx="164" cy="17" rx="3" ry="3.8" transform="rotate(16 164 17)"/></g>
+  </svg>
+
+  <section class="section" aria-label="Quick actions">
+    <div class="section-head"><div><h2>What can you do here?</h2><p>Pick an action and you land right at its section.</p></div></div>
+    <div class="rail">
+      <a href="#directory"><svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.6"/><path d="M19.5 19.5l-3.6-3.4"/></svg>Find a provider</a>
+      <a href="#bookings"><svg class="icon" viewBox="0 0 24 24"><rect x="3.2" y="5.2" width="17.6" height="15.6" rx="2"/><path d="M3.4 10.2h17.3M8.2 3v4M15.8 3.2v3.8"/></svg>Track my bookings</a>
+      <a href="#breed"><svg class="icon" viewBox="0 0 24 24"><rect x="3.2" y="6.2" width="17.6" height="13.6" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8.2 6.1L9.6 3.6h4.9L15.9 6"/></svg>Identify a breed</a>
+      <a href="#lost"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20.8S5.2 15.4 5.1 10a6.9 6.9 0 1113.8.2c-.1 5.3-6.9 10.6-6.9 10.6z"/><circle cx="12" cy="10" r="2.5"/></svg>Report lost or found</a>
+      <a href="#adopt"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20s-6.8-4.2-8.8-8.8A4.9 4.9 0 0112 8.2a4.9 4.9 0 018.8 3C18.8 15.8 12 20 12 20z"/></svg>Adopt or rehome</a>
+      <a href="#shop"><svg class="icon" viewBox="0 0 24 24"><path d="M4.2 6.2h15.7l-1.1 7.8H6.1L4.9 3.2H2.2"/><circle cx="7.2" cy="19.8" r="1.5"/><circle cx="16.8" cy="19.8" r="1.5"/></svg>Buy supplies</a>
+      <a href="#articles"><svg class="icon" viewBox="0 0 24 24"><path d="M5.2 4.2h11.6a2 2 0 012 2V20H7.2a2 2 0 01-2-2z"/><path d="M9.2 9.2h5.8M9.2 13h5.8"/></svg>Read care articles</a>
+    </div>
+  </section>
+
+  <section class="section" id="pets">
+    <div class="section-head"><div><h2>My pets and their health records</h2><p>A follow-up notebook: every pet with its records, vaccinations and due dates.</p></div></div>
+    <div class="ledger" id="pets-list"></div>
+
+    <div class="grid2" style="margin-top:1.4rem">
+      <form class="card" id="pet-form">
+        <h3 style="margin-top:0">Add a new pet</h3>
+        <div class="form-grid">
+          <div><label for="pet-name">Name</label><input id="pet-name" required></div>
+          <div><label for="pet-species">Species</label><input id="pet-species" placeholder="cat, dog, bird…" required></div>
+          <div><label for="pet-breed">Breed</label><input id="pet-breed"></div>
+          <div><label for="pet-birth">Birth date</label><input id="pet-birth" type="date"></div>
+        </div>
+        <div class="msg" id="pet-msg"></div>
+        <button class="btn" type="submit" style="margin-top:.7rem">Save pet</button>
+      </form>
+      <form class="card" id="health-form">
+        <h3 style="margin-top:0">Add a health record</h3>
+        <div class="form-grid">
+          <div><label for="health-pet">Pet</label><select id="health-pet" required></select></div>
+          <div><label for="health-kind">Kind</label><select id="health-kind"><option value="vaccine">Vaccination</option><option value="medicine">Medication</option><option value="checkup">Checkup</option><option value="deworming">Deworming and parasites</option></select></div>
+          <div><label for="health-name">Vaccine or medicine name</label><input id="health-name" required></div>
+          <div><label for="health-given">Date given</label><input id="health-given" type="date"></div>
+          <div><label for="health-due">Next due</label><input id="health-due" type="date"></div>
+        </div>
+        <div class="msg" id="health-msg"></div>
+        <button class="btn" type="submit" style="margin-top:.7rem">Save health record</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="directory">
+    <div class="section-head"><div><h2>Service directory</h2><p>Approved providers only. Choose your pet, then tap an open slot to book instantly.</p></div></div>
+    <form class="filters" id="dir-filters">
+      <div><label for="f-city">City</label><input id="f-city" placeholder="e.g. Tanta"></div>
+      <div><label for="f-category">Category</label><select id="f-category"><option value="">All categories</option></select></div>
+      <div><label for="f-q">Search by name or service</label><input id="f-q" placeholder="clinic, grooming, vaccine…"></div>
+      <button class="btn" type="submit">Search</button>
+    </form>
+    <div style="max-width:340px;margin-bottom:1rem"><label for="booking-pet">Booking for pet</label><select id="booking-pet"></select></div>
+    <div class="msg" id="dir-msg"></div>
+    <div id="dir-list"></div>
+  </section>
+
+  <section class="section" id="bookings">
+    <div class="section-head"><div><h2>My bookings</h2><p>Each booking's status, total, platform commission and provider net — exactly as on the invoice.</p></div></div>
+    <div class="msg" id="booking-msg"></div>
+    <div id="bookings-list"></div>
+  </section>
+
+  <section class="section" id="breed">
+    <div class="section-head"><div><h2>Breed identification from a photo</h2><p>A beta tool. Upload a photo and the system will try to identify the species, the breed and basic care notes.</p></div></div>
+    <div class="grid2">
+      <form class="card" id="breed-form">
+        <span class="chip ochre">Beta demo</span>
+        <div style="margin-top:.8rem"><label for="breed-file">Choose a pet photo</label><input id="breed-file" type="file" accept="image/*"></div>
+        <div style="margin-top:.7rem"><label for="breed-species">Species, as you know it (optional)</label><input id="breed-species" placeholder="cat or dog…"></div>
+        <div class="msg" id="breed-msg"></div>
+        <button class="btn" type="submit" style="margin-top:.7rem">Analyse photo</button>
+        <p class="small">This is a demo result for guidance only — not a diagnosis and not a final breed confirmation. When in doubt, ask a vet.</p>
+      </form>
+      <div class="card" id="breed-result"><div class="empty"><h3>No result yet</h3><p>Choose a clear photo of the pet's face and body, then press Analyse photo. The result appears here with first care tips.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="lost">
+    <div class="section-head"><div><h2>Lost and found</h2><p>Reports of lost and found pets, with the reporter's contact details.</p></div></div>
+    <div class="grid2">
+      <div id="lost-list"></div>
+      <form class="card" id="lost-form">
+        <h3 style="margin-top:0">Post a new report</h3>
+        <div class="form-grid">
+          <div><label for="lost-kind">Report type</label><select id="lost-kind"><option value="lost">Lost pet</option><option value="found">Pet I found</option></select></div>
+          <div><label for="lost-title">Title</label><input id="lost-title" required></div>
+          <div><label for="lost-pet">Pet name</label><input id="lost-pet"></div>
+          <div><label for="lost-species">Species</label><input id="lost-species"></div>
+          <div><label for="lost-city">City</label><input id="lost-city" required></div>
+          <div><label for="lost-area">Area</label><input id="lost-area"></div>
+          <div><label for="lost-phone">Contact phone</label><input id="lost-phone" type="tel"></div>
+          <div class="full"><label for="lost-desc">Description and distinguishing marks</label><textarea id="lost-desc" rows="3"></textarea></div>
+        </div>
+        <div class="msg" id="lost-msg"></div>
+        <button class="btn" type="submit" style="margin-top:.7rem">Post report</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="adopt">
+    <div class="section-head"><div><h2>Adoption</h2><p>Pets offered for adoption by owners and shelters. Contact the poster directly.</p></div></div>
+    <div class="grid2">
+      <div id="adopt-list"></div>
+      <form class="card" id="adopt-form">
+        <h3 style="margin-top:0">Offer a pet for adoption</h3>
+        <div class="form-grid">
+          <div><label for="ad-title">Title</label><input id="ad-title" required></div>
+          <div><label for="ad-name">Pet name</label><input id="ad-name"></div>
+          <div><label for="ad-species">Species</label><input id="ad-species"></div>
+          <div><label for="ad-breed">Breed</label><input id="ad-breed"></div>
+          <div><label for="ad-age">Age</label><input id="ad-age" placeholder="e.g. 8 months"></div>
+          <div><label for="ad-city">City</label><input id="ad-city"></div>
+          <div><label for="ad-phone">Contact phone</label><input id="ad-phone" type="tel"></div>
+          <div class="full"><label for="ad-desc">Description and adoption conditions</label><textarea id="ad-desc" rows="3"></textarea></div>
+        </div>
+        <div class="msg" id="adopt-msg"></div>
+        <button class="btn" type="submit" style="margin-top:.7rem">Post adoption listing</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="community">
+    <div class="section-head"><div><h2>Pet owners community</h2><p>Ask and share your experience. You can comment on posts or report rule-breaking content to the admins.</p></div></div>
+    <form class="card" id="post-form" style="margin-bottom:1rem">
+      <div class="form-grid">
+        <div><label for="post-title">Post title</label><input id="post-title" required></div>
+        <div class="full"><label for="post-body">Post text</label><textarea id="post-body" rows="3" required></textarea></div>
+      </div>
+      <div class="msg" id="post-msg"></div>
+      <button class="btn" type="submit" style="margin-top:.7rem">Post to the community</button>
+    </form>
+    <div id="posts-list"></div>
+  </section>
+
+  <section class="section" id="articles">
+    <div class="section-head"><div><h2>Care articles and tips</h2><p>Educational content on nutrition, training, behaviour and health.</p></div></div>
+    <div id="articles-list"></div>
+  </section>
+
+  <section class="section" id="shop">
+    <div class="section-head"><div><h2>Supplies shop</h2><p>Products from participating shops. Ordering here is a labelled simulation in this version — no real payment or delivery happens yet.</p></div></div>
+    <div class="msg" id="shop-msg"></div>
+    <div id="products-list"></div>
+  </section>
+</div>
+
+<footer class="site">PetBridge — a demo platform running locally. Payment in this version is simulated and is not a real payment gateway.</footer>
+
+<div class="modal-back" id="tour-back">
+  <div class="modal">
+    <span class="chip teal" id="tour-step-label"></span>
+    <h2 id="tour-title"></h2>
+    <p id="tour-text"></p>
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+      <button class="btn" id="tour-next" type="button">Next</button>
+      <button class="btn ghost" id="tour-close" type="button">End tour</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-back" id="booked-back">
+  <div class="modal" style="text-align:center">
+    <span class="circle-wrap"><svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="100" cy="30" rx="96" ry="26" transform="rotate(-1.5 100 30)"/></svg><h2 style="margin:0">Booking sent</h2></span>
+    <p id="booked-text" style="margin-top:1rem"></p>
+    <p class="margin-note">circled, noted, and on its way to the provider</p>
+    <button class="btn" id="booked-close" type="button">Back to my bookings</button>
+  </div>
+</div>
+
+<script src="./client.js"></script>
+</body>
+</html>

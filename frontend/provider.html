@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PetBridge | Provider studio</title>
+<meta name="theme-color" content="#0E4F45">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./app.css">
+</head>
+<body class="portal-provider">
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="./provider.html"><img src="./icon.svg" alt="" width="38" height="38"><span>PetBridge<small>provider studio</small></span></a>
+    <button class="side-link active" data-scroll="overview">Overview</button>
+    <button class="side-link" data-scroll="bookings">Booking inbox</button>
+    <button class="side-link" data-scroll="services">Services and prices</button>
+    <button class="side-link" data-scroll="availability">Availability calendar</button>
+    <button class="side-link" data-scroll="documents">Verification documents</button>
+    <button class="side-link" data-scroll="products">Shop products</button>
+    <button class="side-link" data-scroll="orders">Shop orders</button>
+    <button class="side-link" data-scroll="earnings">Earnings and reviews</button>
+    <span style="flex:1"></span>
+    <a class="side-link" href="./index.html">Client portal</a>
+    <button class="side-link" id="logout-btn" type="button">Sign out</button>
+  </aside>
+
+  <main class="main">
+    <span class="kicker">Provider studio console</span>
+    <h1 id="biz-name">My business</h1>
+    <p class="small" id="biz-meta"></p>
+    <div class="msg error" id="page-error"></div>
+    <div class="msg success" id="page-ok"></div>
+    <div class="msg info" id="status-note"></div>
+
+    <section id="overview">
+      <div class="bento">
+        <div class="tile tile-large">
+          <div class="t-k">Booking inbox — waiting for you</div>
+          <div class="t-v big" id="st-pending">-</div>
+          <div class="small">pending requests. Accepted upcoming: <span class="t-v" id="st-accepted">-</span> · Completed: <span class="t-v" id="st-completed">-</span></div>
+          <div class="second">
+            <div class="next-line" id="next-pending">No pending booking right now.</div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem">
+              <button class="btn small" id="quick-accept" type="button" hidden>Accept next request</button>
+              <button class="btn small" data-scroll="bookings" type="button" style="background:transparent;border:1.5px solid rgba(234,243,239,.5);color:#EAF3EF">Open the full inbox</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile tile-med">
+          <div class="t-k">Earnings on completed work</div>
+          <div class="earn-row"><span>Gross</span><span class="money" id="st-gross">-</span></div>
+          <div class="earn-row"><span>Platform commission</span><span class="money" id="st-commission">-</span></div>
+          <div class="earn-row"><span><strong>Your net</strong></span><span class="money" id="st-net" style="font-size:1.15rem">-</span></div>
+          <div class="spark" id="earn-spark" aria-hidden="true"></div>
+          <div class="small">Each bar is one completed booking's net, oldest to newest.</div>
+        </div>
+
+        <div class="tile tile-med">
+          <div class="t-k">Requests needing a decision</div>
+          <div id="pend-list"><p class="small">Nothing waiting. New booking requests will appear here with their accept and reject actions inside this tile.</p></div>
+        </div>
+
+        <div class="tile tile-small">
+          <div class="t-k">Client rating</div>
+          <div class="t-v" id="st-rating">-</div>
+          <div class="small">average of client reviews</div>
+        </div>
+        <div class="tile tile-small">
+          <div class="t-k">Shop orders</div>
+          <div class="t-v" id="st-orders">-</div>
+          <div class="small">orders on your products</div>
+        </div>
+        <div class="tile tile-small">
+          <div class="t-k">Profile completeness</div>
+          <div class="t-v" id="st-complete">-</div>
+          <div class="small" id="st-complete-note">approval, services, slots, documents</div>
+        </div>
+        <div class="tile tile-small">
+          <div class="t-k">Quick actions</div>
+          <div class="small"><span class="t-v" id="st-services">-</span> services registered</div>
+          <div class="quick-actions">
+            <button class="btn small" data-scroll="services" type="button">Add a service</button>
+            <button class="btn small ghost" data-scroll="availability" type="button">Open a slot</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="bookings">
+      <h2>Booking inbox</h2>
+      <div class="msg" id="booking-msg"></div>
+      <div class="table-wrap"><table><thead><tr><th>Service</th><th>Client and pet</th><th>When</th><th>Status</th><th>Total and your net</th><th>Action</th></tr></thead><tbody id="bookings-body"></tbody></table></div>
+      <div id="bookings-empty"></div>
+    </section>
+
+    <section class="panel" id="services">
+      <h2>My services and prices</h2>
+      <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:16px;align-items:start" class="svc-grid">
+        <form class="card" id="service-form">
+          <div><label for="svc-tax">Service from the taxonomy</label><select id="svc-tax" required></select></div>
+          <div style="margin-top:.6rem"><label for="svc-name">Offer name, as clients see it</label><input id="svc-name" required></div>
+          <div class="form-grid" style="margin-top:.6rem">
+            <div><label for="svc-price">Price (EGP)</label><input id="svc-price" type="number" min="0" step="0.01" required></div>
+            <div><label for="svc-duration">Duration (minutes)</label><input id="svc-duration" type="number" min="5" step="5" required></div>
+            <div><label for="svc-mode">Where it happens</label><select id="svc-mode"><option value="onsite">At our place</option><option value="home">Client's home</option><option value="online">Online</option><option value="delivery">Delivery</option></select></div>
+          </div>
+          <div class="msg" id="service-msg"></div>
+          <button class="btn" type="submit" style="margin-top:.6rem">Publish service</button>
+        </form>
+        <div class="table-wrap" style="align-self:start"><table><thead><tr><th>Service</th><th>Category</th><th>Price</th><th>Duration and place</th></tr></thead><tbody id="services-body"></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="panel" id="availability">
+      <h2>Availability calendar</h2>
+      <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:16px;align-items:start">
+        <form class="card" id="avail-form">
+          <div class="form-grid">
+            <div><label for="av-date">Date</label><input id="av-date" type="date" required></div>
+            <div><label for="av-cap">Capacity (pets)</label><input id="av-cap" type="number" min="1" value="1" required></div>
+            <div><label for="av-start">From</label><input id="av-start" type="time" required></div>
+            <div><label for="av-end">To</label><input id="av-end" type="time" required></div>
+          </div>
+          <div class="msg" id="avail-msg"></div>
+          <button class="btn" type="submit" style="margin-top:.6rem">Open this slot</button>
+        </form>
+        <div class="table-wrap" style="align-self:start"><table><thead><tr><th>Date</th><th>Time</th><th>Capacity</th><th>Booked</th></tr></thead><tbody id="avail-body"></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="panel" id="documents">
+      <h2>Verification documents</h2>
+      <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:16px;align-items:start">
+        <form class="card" id="doc-form">
+          <div><label for="doc-type">Document type</label><input id="doc-type" placeholder="license, id or certificate" required></div>
+          <div style="margin-top:.6rem"><label for="doc-label">Document description</label><input id="doc-label" required></div>
+          <div style="margin-top:.6rem"><label for="doc-file">File name</label><input id="doc-file" required></div>
+          <div class="msg" id="doc-msg"></div>
+          <button class="btn" type="submit" style="margin-top:.6rem">Register document</button>
+        </form>
+        <div id="docs-list"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="products">
+      <h2>Shop products</h2>
+      <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:16px;align-items:start">
+        <form class="card" id="product-form">
+          <div><label for="prod-name">Product name</label><input id="prod-name" required></div>
+          <div style="margin-top:.6rem"><label for="prod-desc">Description</label><textarea id="prod-desc" rows="2"></textarea></div>
+          <div class="form-grid" style="margin-top:.6rem">
+            <div><label for="prod-price">Price (EGP)</label><input id="prod-price" type="number" min="0" step="0.01" required></div>
+            <div><label for="prod-stock">Stock</label><input id="prod-stock" type="number" min="0" value="1" required></div>
+          </div>
+          <div class="msg" id="product-msg"></div>
+          <button class="btn" type="submit" style="margin-top:.6rem">Publish product</button>
+        </form>
+        <div class="table-wrap" style="align-self:start"><table><thead><tr><th>Product</th><th>Price</th><th>Stock</th><th>Status</th></tr></thead><tbody id="products-body"></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="panel" id="orders">
+      <h2>Shop orders</h2>
+      <div class="table-wrap"><table><thead><tr><th>Product</th><th>Client</th><th>Qty</th><th>Total</th><th>Status</th></tr></thead><tbody id="orders-body"></tbody></table></div>
+      <div id="orders-empty"></div>
+    </section>
+
+    <section class="panel" id="earnings">
+      <h2>Earnings and reviews</h2>
+      <div class="earn-row"><span>Gross of completed bookings and sales</span><span class="money" id="earn-gross">-</span></div>
+      <div class="earn-row"><span>Platform commission</span><span class="money" id="earn-comm">-</span></div>
+      <div class="earn-row"><span><strong>Your net due</strong></span><span class="money" id="earn-net">-</span></div>
+      <h3 style="margin-top:1.2rem">Client reviews</h3>
+      <div id="reviews-list"></div>
+    </section>
+  </main>
+</div>
+<script src="./provider.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PetBridge | Sign in</title>
+<meta name="theme-color" content="#2E7D6B">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="./icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./app.css">
+</head>
+<body class="portal-auth">
+<div class="auth-shell">
+  <a class="brand" href="./login.html"><img src="./icon.svg" alt="" width="42" height="42"><span>PetBridge<small>your pet's care bridge</small></span></a>
+
+  <div class="auth-grid">
+    <aside class="auth-intro">
+      <span class="kicker" style="color:#8a5c07">Welcome</span>
+      <h1>Your pet's care starts with one account.</h1>
+      <p>Clients manage their pets and bookings. Providers run their business, bookings and earnings from their own studio. Admins watch the whole platform from the console.</p>
+      <p>A new provider account stays under review until the admins approve it after checking its documents; the studio does not open before approval.</p>
+      <p class="margin-note">one account, three doors — yours opens by itself</p>
+
+      <div class="demo-box">
+        <h3 style="margin-top:0">Ready demo accounts in the local version</h3>
+        <div class="demo-acct"><span><b>admin@petbridge.local</b> / Admin123!</span><span class="demo-role">Platform admin</span></div>
+        <div class="demo-acct"><span><b>sara@petbridge.local</b> / Sara123!</span><span class="demo-role">Client</span></div>
+        <div class="demo-acct"><span><b>clinic@petbridge.local</b> / Vet123!</span><span class="demo-role">Approved provider</span></div>
+        <div class="demo-acct"><span><b>pending@petbridge.local</b> / Wait123!</span><span class="demo-role">Provider under review</span></div>
+      </div>
+    </aside>
+
+    <main class="card">
+      <div class="tabs" role="tablist">
+        <button class="tab active" type="button" data-tab="login">Sign in</button>
+        <button class="tab" type="button" data-tab="customer">New client account</button>
+        <button class="tab" type="button" data-tab="provider">Provider account</button>
+      </div>
+      <div class="msg" id="auth-msg"></div>
+
+      <form id="login-form" data-pane="login">
+        <div style="margin-bottom:.8rem"><label for="login-email">Email</label><input id="login-email" type="email" required autocomplete="email"></div>
+        <div style="margin-bottom:.8rem"><label for="login-password">Password</label><input id="login-password" type="password" required autocomplete="current-password"></div>
+        <div class="msg" id="pending-note"></div>
+        <button class="btn" type="submit" style="width:100%;justify-content:center">Sign in</button>
+        <p class="small">You are routed automatically by role: clients to their portal, approved providers to the studio, admins to the console.</p>
+      </form>
+
+      <form id="customer-form" data-pane="customer" hidden>
+        <div class="form-grid">
+          <div><label for="c-name">Full name</label><input id="c-name" required></div>
+          <div><label for="c-phone">Phone number</label><input id="c-phone" type="tel" required></div>
+          <div><label for="c-email">Email</label><input id="c-email" type="email" required></div>
+          <div><label for="c-password">Password</label><input id="c-password" type="password" required autocomplete="new-password"></div>
+        </div>
+        <button class="btn" type="submit" style="margin-top:1rem;width:100%;justify-content:center">Create client account and enter</button>
+      </form>
+
+      <form id="provider-form" data-pane="provider" hidden>
+        <div class="form-grid">
+          <div><label for="p-name">Contact person name</label><input id="p-name" required></div>
+          <div><label for="p-phone">Phone number</label><input id="p-phone" type="tel" required></div>
+          <div><label for="p-email">Email</label><input id="p-email" type="email" required></div>
+          <div><label for="p-password">Password</label><input id="p-password" type="password" required autocomplete="new-password"></div>
+          <div><label for="p-business">Business name</label><input id="p-business" required></div>
+          <div><label for="p-kind">Business kind</label>
+            <select id="p-kind">
+              <option value="clinic">Veterinary clinic</option>
+              <option value="grooming">Grooming and care</option>
+              <option value="training">Training and behaviour</option>
+              <option value="boarding">Boarding and day care</option>
+              <option value="shop">Supplies shop</option>
+              <option value="transport">Pet transport</option>
+              <option value="shelter">Shelter or breeder</option>
+              <option value="other">Other business</option>
+            </select></div>
+          <div><label for="p-city">City</label><input id="p-city" required></div>
+          <div><label for="p-area">Area</label><input id="p-area"></div>
+          <div class="full"><label for="p-address">Full address</label><input id="p-address"></div>
+          <div class="full"><label for="p-desc">About the business and its services</label><textarea id="p-desc" rows="3"></textarea></div>
+        </div>
+        <h3 style="font-size:1rem;margin:1.1rem 0 .4rem">Verification documents</h3>
+        <p class="small">List your documents here by file name. The admins review the list before approving the account.</p>
+        <div id="doc-rows">
+          <div class="doc-row">
+            <input data-doc="type" placeholder="Document type, e.g. license">
+            <input data-doc="label" placeholder="Description, e.g. Clinic licence">
+            <input data-doc="file" placeholder="File name, e.g. license.pdf">
+          </div>
+        </div>
+        <button class="btn ghost small" type="button" id="add-doc">Add another document</button>
+        <div class="pending-note" style="margin-top:1rem">After registration your account appears to the admins as a pending request. Approval is the platform administration's decision after reviewing the documents.</div>
+        <button class="btn ochre" type="submit" style="margin-top:1rem;width:100%;justify-content:center">Register the business and wait for approval</button>
+      </form>
+    </main>
+  </div>
+</div>
+<script src="./auth.js"></script>
+</body>
+</html>

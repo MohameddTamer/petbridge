@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PetBridge | Admin console</title>
+<meta name="theme-color" content="#131517">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./app.css">
+</head>
+<body class="portal-admin">
+<div class="layout">
+  <div class="maincol">
+    <div class="brandrow">
+      <a class="brand" href="./admin.html"><img src="./icon.svg" alt="" width="34" height="34"><span>PetBridge<small>platform administration</small></span></a>
+      <span style="flex:1"></span>
+      <span class="small" id="admin-meta"></span>
+      <a class="btn small ghost" href="./index.html">Client portal</a>
+      <button class="btn small" id="logout-btn" type="button">Sign out</button>
+    </div>
+    <nav class="navrow">
+      <button class="side-link active" data-scroll="kpis">Platform indicators</button>
+      <button class="side-link" data-scroll="queues">Approval queues</button>
+      <button class="side-link" data-scroll="users">Users</button>
+      <button class="side-link" data-scroll="moderation">Moderation</button>
+      <button class="side-link" data-scroll="operations">Bookings and operations</button>
+      <button class="side-link" data-scroll="settings">Settings</button>
+    </nav>
+
+    <span class="kicker">Central control register</span>
+    <h1>Everything happening on the platform, in front of you.</h1>
+    <p class="small">Approvals, suspensions and moderation write straight to the database and appear in the audit rail on the right, in real time.</p>
+    <div class="msg error" id="page-error"></div>
+    <div class="msg success" id="page-ok"></div>
+
+    <section id="kpis">
+      <div class="kpi-strip" id="kpi-strip"></div>
+      <div class="kpi-strip" id="kpi-strip-2" style="border-top:0"></div>
+    </section>
+
+    <section class="panel" id="queues">
+      <h2>Approval queues</h2>
+      <div class="msg" id="queue-msg"></div>
+      <h3>Providers waiting for approval</h3>
+      <div class="table-wrap"><table><thead><tr><th>Business</th><th>Kind and place</th><th>Status</th><th>Decision</th></tr></thead><tbody id="q-providers"></tbody></table></div>
+      <div id="q-providers-empty"></div>
+      <h3>Services waiting for review</h3>
+      <div class="table-wrap"><table><thead><tr><th>Service</th><th>Provider</th><th>Price</th><th>Decision</th></tr></thead><tbody id="q-services"></tbody></table></div>
+      <div id="q-services-empty"></div>
+      <h3>Products waiting for review</h3>
+      <div class="table-wrap"><table><thead><tr><th>Product</th><th>Shop</th><th>Price and stock</th><th>Decision</th></tr></thead><tbody id="q-products"></tbody></table></div>
+      <div id="q-products-empty"></div>
+    </section>
+
+    <section class="panel" id="users">
+      <h2>Users and providers</h2>
+      <div class="msg" id="user-msg"></div>
+      <div class="table-wrap"><table><thead><tr><th>Name</th><th>Email and phone</th><th>Role</th><th>Status</th><th>Action</th></tr></thead><tbody id="users-body"></tbody></table></div>
+      <div id="users-empty"></div>
+    </section>
+
+    <section class="panel" id="moderation">
+      <h2>Community moderation</h2>
+      <div class="msg" id="mod-msg"></div>
+      <div class="table-wrap"><table><thead><tr><th>Post</th><th>Author</th><th>Date</th><th>Action</th></tr></thead><tbody id="posts-body"></tbody></table></div>
+      <h3>Open reports</h3>
+      <div id="reports-list"></div>
+    </section>
+
+    <section class="panel" id="operations">
+      <h2>Bookings and finance oversight</h2>
+      <div class="table-wrap"><table><thead><tr><th>Service</th><th>Client and provider</th><th>When</th><th>Status</th><th>Total, commission, net</th></tr></thead><tbody id="bookings-body"></tbody></table></div>
+      <div id="bookings-empty"></div>
+    </section>
+
+    <section class="panel" id="settings">
+      <h2>Platform settings</h2>
+      <form class="card" id="settings-form" style="max-width:480px">
+        <div><label for="commission-rate">Platform commission rate on bookings, from 0 to 1. Example: 0.12 means twelve percent</label><input id="commission-rate" type="number" min="0" max="1" step="0.01" required></div>
+        <div class="msg" id="settings-msg"></div>
+        <button class="btn" type="submit" style="margin-top:.7rem">Save settings</button>
+      </form>
+      <div id="settings-extra" class="small mono" style="margin-top:.8rem"></div>
+    </section>
+  </div>
+
+  <aside class="audit-rail" id="audit">
+    <h2>Audit log</h2>
+    <p class="small">A permanent register. It cannot be edited or deleted from this interface: who did what, and when.</p>
+    <div class="table-wrap"><table><thead><tr><th>Time</th><th>Actor</th><th>Action</th><th>Details</th></tr></thead><tbody id="audit-body"></tbody></table></div>
+    <div id="audit-empty"></div>
+  </aside>
+</div>
+<script src="./admin.js"></script>
+</body>
+</html>

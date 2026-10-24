@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="PetBridge">
+  <rect x="5" y="5" width="86" height="86" rx="19" fill="#0E4F45"/>
+  <path d="M13 67 C 27 51, 38 46, 48 46.5 C 59 47, 71 52, 83 66.5" fill="none" stroke="#E3A72F" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M19 68.5 L 77 67.2" stroke="#FFFDF8" stroke-width="3.5" stroke-linecap="round"/>
+  <g fill="#FFFDF8" stroke="#22301F" stroke-width="1.6">
+    <ellipse cx="48" cy="57.5" rx="10.8" ry="8.8"/>
+    <ellipse cx="31.5" cy="45.5" rx="5.3" ry="6.9" transform="rotate(-17 31.5 45.5)"/>
+    <ellipse cx="41" cy="39.5" rx="5.3" ry="7.4" transform="rotate(-5 41 39.5)"/>
+    <ellipse cx="55" cy="39.8" rx="5.4" ry="7.3" transform="rotate(7 55 39.8)"/>
+    <ellipse cx="64.8" cy="45.8" rx="5.2" ry="6.8" transform="rotate(19 64.8 45.8)"/>
+  </g>
+</svg>
