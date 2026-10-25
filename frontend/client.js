@@ -204,7 +204,7 @@ async function bookSlot(service, slot, prov) {
     show('dir-msg', 'Your booking was sent to ' + (service.name || 'the service') + ' and is now waiting for the provider to accept. Follow its status under My bookings.', 'success');
     var petName = '';
     state.pets.forEach(function (p) { if (String(p.id) === String(petId)) petName = p.name; });
-    $('booked-text').textContent = (service.name || 'Service') + (prov && prov.business_name ? ' at ' + prov.business_name : '') + (petName ? ' for ' + petName : '') + ' — ' + (slot.date || '') + ' ' + (slot.start_time || '') + '. It is waiting for the provider to accept.';
+    $('booked-text').textContent = (service.name || 'Service') + (prov && prov.business_name ? ' at ' + prov.business_name : '') + (petName ? ' for ' + petName : '') + ', ' + (slot.date || '') + ' ' + (slot.start_time || '') + '. It is waiting for the provider to accept.';
     $('booked-back').classList.add('show');
     loadBookings(); loadDirectory();
   } catch (e) { show('dir-msg', e.message, 'error'); }
@@ -328,7 +328,7 @@ async function loadProducts() {
       btn.addEventListener('click', async function () {
         try {
           var r = await postJson('/api/orders', { product_id: p.id, qty: Number(qty.value) || 1 });
-          show('shop-msg', (r.label || r.message || 'The demo order was created.') + ' This is a simulated order inside the demo — there is no real payment or delivery.', 'success');
+          show('shop-msg', (r.label || r.message || 'The demo order was created.') + ' This is a simulated order inside the demo, there is no real payment or delivery.', 'success');
         } catch (e) { show('shop-msg', e.message, 'error'); }
       });
       side.appendChild(qty); side.appendChild(btn);

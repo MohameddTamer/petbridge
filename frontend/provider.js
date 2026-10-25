@@ -57,7 +57,7 @@ function fillBento(d, prov, s) {
   var nextLine = $('next-pending');
   var quick = $('quick-accept');
   if (next) {
-    nextLine.textContent = 'Next: ' + (next.service_name || 'Service') + ' — ' + (next.customer_name || next.client_name || 'Client') + ', ' + fmtDate(next.start_at) + ', ' + money(next.total);
+    nextLine.textContent = 'Next: ' + (next.service_name || 'Service') + ', ' + (next.customer_name || next.client_name || 'Client') + ', ' + fmtDate(next.start_at) + ', ' + money(next.total);
     quick.hidden = false;
     quick.onclick = function () { bookingAction(next.id, 'accept', ''); };
   } else {
@@ -223,7 +223,7 @@ async function bookingAction(id, action, proposed) {
     var body = { action: action };
     if (action === 'propose') body.proposed_start_at = proposed;
     await postJson('/api/provider/bookings/' + id + '/action', body);
-    show('booking-msg', 'Done — the booking was updated.', 'success'); load();
+    show('booking-msg', 'Done, the booking was updated.', 'success'); load();
   } catch (e) { show('booking-msg', e.message, 'error'); }
 }
 

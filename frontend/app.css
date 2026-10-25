@@ -25,7 +25,7 @@ table{border-collapse:collapse;width:100%}
 .table-wrap{overflow-x:auto}
 details summary{cursor:pointer;font-weight:700}
 
-/* ================= CLIENT + AUTH — Hand-Drawn Companion ================= */
+/* ================= CLIENT + AUTH, Hand-Drawn Companion ================= */
 body.portal-client,body.portal-auth{
   --paper:#FFFDF8; --ink:#22301F; --teal:#2E7D6B; --teal-deep:#0E4F45; --ochre:#E3A72F; --brick:#B3402A;
   background:var(--paper); color:var(--ink);
@@ -213,7 +213,7 @@ body.portal-client,body.portal-auth{
 @media (max-width:640px){.portal-auth .doc-row{grid-template-columns:1fr}}
 .portal-auth .pending-note{border:2px dashed var(--ochre);padding:.7rem .9rem;font-size:.9rem;background:rgba(227,167,47,.1)}
 
-/* ================= PROVIDER — Bento Studio Console ================= */
+/* ================= PROVIDER, Bento Studio Console ================= */
 body.portal-provider{
   --porcelain:#F6F4EF; --tile:#FFFFFF; --tile2:#EFECE5; --tile3:#E7E2D6;
   --deep:#0E4F45; --teal:#2E7D6B; --ochre:#D98E1F; --ink:#1E2A26; --brick:#B3402A;
@@ -294,7 +294,7 @@ body.portal-provider{
 .portal-provider .quick-actions{display:flex;flex-direction:column;gap:.45rem;margin-top:.5rem}
 .portal-provider .quick-actions .btn{justify-content:center}
 
-/* ================= ADMIN — Monochrome Swiss Console ================= */
+/* ================= ADMIN, Monochrome Swiss Console ================= */
 body.portal-admin{
   --char:#131517; --panel:#1B1E21; --panel2:#22262A; --hair:#2C3034; --txt:#E8EAEB; --dim:#9BA1A6;
   --approve:#2E7D6B; --refuse:#C8402F;
