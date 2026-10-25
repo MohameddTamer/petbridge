@@ -105,7 +105,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     for (final slot in service.slots)
                       RadioListTile<int>(
                         title: Text(
-                            '${slot.date} ${slot.startTime}–${slot.endTime}'),
+                            '${slot.date} ${slot.startTime} to ${slot.endTime}'),
                         subtitle: Text('${slot.remaining} places left'),
                         value: slot.id,
                       ),

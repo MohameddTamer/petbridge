@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
               for (final b in state.bookings)
                 ListTile(
                   title: Text('${b.serviceName} at ${b.businessName}'),
-                  subtitle: Text('${b.startAt} — ${b.status}'),
+                  subtitle: Text('${b.startAt}, ${b.status}'),
                   trailing: Text(egp(b.total),
                       style: const TextStyle(fontWeight: FontWeight.w700)),
                 ),
