@@ -1,4 +1,4 @@
-# نقد ذاتي وفحص قبول — PetBridge 0.1.0
+# نقد ذاتي وفحص قبول, PetBridge 0.1.0
 
 التاريخ: ٢٠٢٦-١٠-٢٤. الفحص اتعمل على كود المشروع نفسه بقاعدة بيانات مؤقتة جديدة، مش على أرقام من الذاكرة.
 
@@ -67,23 +67,23 @@
 - الجلسات بلا انتهاء تلقائي ولا يوجد حد لمحاولات الدخول. الاثنان موثقان في SECURITY كعمل إطلاق واجب، وليسا مطبقين الآن.
 - SQLite وخادم واحد قرار إطلاق أول واع. أي نمو يتجاوز مدينة أو مدينتين يحتاج نقل قاعدة البيانات وخدمة ملفات ومراقبة تشغيل حقيقية.
 
-## Redesign and English conversion — 2026-10-24 (0.2.0)
+## Redesign and English conversion, 2026-10-24 (0.2.0)
 
 Everything user-facing was converted to English only and the three portals were rebuilt as three distinct identities of one brand (full rationale in DESIGN.md): the client portal as a Hand-Drawn Companion, the provider portal as a disciplined Bento Studio Console, and the admin console as a Monochrome Swiss Console with a permanent audit rail. FULL-SPEC.md stays as the Arabic planning record, as agreed. Backend logic and money math were not touched.
 
 ### What was converted
 
-- Backend display text: the 35-service taxonomy and 8 category labels, the breed profiles and result labels, every API error message, the age label format ("2 years and 3 months"), the simulated payment labels, and all seed display data — people, businesses, cities, areas, addresses, pets, health records, reviews, posts, lost and found, adoptions, articles and products. The Egyptian setting is kept in English words: Nile Veterinary Clinic in Tanta on El Bahr Street, Warda Pet Salon in Cairo, Rizk Dog Training Academy in Alexandria.
-- The only Arabic left anywhere in the codebase is inside `breed.py`'s alias lists, where Arabic words act as input matchers for file names — they are never displayed.
+- Backend display text: the 35-service taxonomy and 8 category labels, the breed profiles and result labels, every API error message, the age label format ("2 years and 3 months"), the simulated payment labels, and all seed display data, people, businesses, cities, areas, addresses, pets, health records, reviews, posts, lost and found, adoptions, articles and products. The Egyptian setting is kept in English words: Nile Veterinary Clinic in Tanta on El Bahr Street, Warda Pet Salon in Cairo, Rizk Dog Training Academy in Alexandria.
+- The only Arabic left anywhere in the codebase is inside `breed.py`'s alias lists, where Arabic words act as input matchers for file names, they are never displayed.
 - Tests that asserted the old strings were updated to the English ones (clinic name, the rabies record, "Simulated" in the payment label, breed "Baladi", `lang="en"` in test_19).
 
 ### Tests before and after
 
-- Before the conversion: `python3 -m unittest discover -s tests` — 22 tests, OK.
+- Before the conversion: `python3 -m unittest discover -s tests`, 22 tests, OK.
 - After the backend conversion, before the frontend rewrite: 21 of 22, with the single expected failure being test_19 waiting for `lang="en"` pages.
 - After the frontend rewrite: **22 tests, OK.** All five JavaScript files also pass `node --check`, and a live boot served all four pages plus CSS, manifest, service worker and icon at 200 with correct content types.
 
-### Numbers unchanged — proof
+### Numbers unchanged, proof
 
 Verified against a fresh seed in a throwaway database after the conversion, by direct SQL:
 
@@ -99,8 +99,8 @@ Only display strings changed in `seed.py`, `taxonomy.py`, `breed.py` and `app.py
 
 ### Honest gaps in this pass
 
-- The new portals were verified by HTTP responses, identifier cross-checks between HTML and JS, and syntax checks — not by clicking through a real browser in this environment (no Chromium installed), so the hand-circled confirmation draw, the bento spark bars and the audit rail's sticky behaviour have not been seen rendering live.
+- The new portals were verified by HTTP responses, identifier cross-checks between HTML and JS, and syntax checks, not by clicking through a real browser in this environment (no Chromium installed), so the hand-circled confirmation draw, the bento spark bars and the audit rail's sticky behaviour have not been seen rendering live.
 - The bento spark bars are computed from the bookings list already returned by the dashboard API; there is no dedicated earnings time-series endpoint, so the bars show per-booking nets in order rather than a calendar series.
-- The admin "expand row to inspect" idea from the research was simplified: queue rows carry their decision inline, but there is no expandable detail drawer — the documents list behind a provider registration is not shown inside the queue row.
+- The admin "expand row to inspect" idea from the research was simplified: queue rows carry their decision inline, but there is no expandable detail drawer, the documents list behind a provider registration is not shown inside the queue row.
 - Fonts load from Google Fonts CDN with system fallbacks; offline, the portals keep their layout and tone but lose the Nunito/Sora/Inter Tight voices.
 - The client paw-print trail is a static drawn path with prints resting on it; the scroll-following draw from the research note was not implemented.

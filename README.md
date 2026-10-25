@@ -2,7 +2,7 @@
 
 PetBridge is a pet services platform for Egypt. A pet owner manages their pets' profiles and health records, finds approved providers and books them. A provider runs their business, bookings and earnings from one studio. The administration reviews providers, services and products, and oversees the community and the money from a third console.
 
-The project is built as a product that can actually run, not a showcase page. Booking, commission, approval and settlement are core parts of the system from the first version. The design system — one brand in three portal identities — is documented in [DESIGN.md](DESIGN.md).
+The project is built as a product that can actually run, not a showcase page. Booking, commission, approval and settlement are core parts of the system from the first version. The design system, one brand in three portal identities, is documented in [DESIGN.md](DESIGN.md).
 
 ## The three systems
 

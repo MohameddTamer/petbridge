@@ -1,13 +1,13 @@
 # Changelog
 
-## 0.2.0 — 2026-10-24 — English conversion and the three-identity redesign
+## 0.2.0, 2026-10-24, English conversion and the three-identity redesign
 
 - The whole product is English only now: all three portals, the auth pages, API messages, the service taxonomy, the breed profiles, seed data, README, SECURITY and the tests. Layout is LTR everywhere. The Egyptian setting stays, written in English words (Tanta, Cairo, Alexandria; Nile Veterinary Clinic; El Bahr Street).
 - One brand, three designed identities (see DESIGN.md): the client portal is a Hand-Drawn Companion (Nunito with Caveat margin notes, washi-taped pet pages, a stitch-line health timeline, a paw-print trail, a hand-circled booking confirmation); the provider portal is a disciplined Bento Studio Console (Sora with IBM Plex Mono money, one large, two medium, four small tiles with live data and decisions inside the tiles); the admin console is a Monochrome Swiss Console (Inter Tight, ruled registers, a permanent audit rail, colour only on approve and reject decisions).
 - The brand mark was redrawn in the hand-drawn stroke family, the PWA manifest is English LTR, and the service worker cache moved to v2.
 - Backend logic and money math are unchanged: the seed still produces a completed booking of 500 with 60 commission and 440 net, a shop order of 170 with 17 commission, an admin commission total of 77, and the vaccine booking flow still computes 350 with 42 commission and 308 net. The full suite still passes 22 of 22.
 
-## 0.1.0 — 2026-10-24
+## 0.1.0, 2026-10-24
 
 First working version of the platform.
 

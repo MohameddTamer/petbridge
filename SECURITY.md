@@ -18,7 +18,7 @@
 - There is no rate limiting on sign-in yet. It must be added before a public launch, with progressive lockout.
 - There is no two-factor authentication yet, although the full report spec mentions it.
 - Session tokens currently have no automatic expiry. Expiry and renewal are added before launch.
-- File uploads are metadata only in this version, so there is no uploaded-file scanning yet — because there is no binary storage at all.
+- File uploads are metadata only in this version, so there is no uploaded-file scanning yet, because there is no binary storage at all.
 - Payment gateway keys and accounts do not exist in the code or the repository; when connected at launch they will be environment variables only.
 
 ## Reporting
